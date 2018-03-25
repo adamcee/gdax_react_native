@@ -1,3 +1,10 @@
+# A Simple React Native App to Interact With the GDAX API
+
+# Resources
+## Configuring React Native with Typescript
+    - This worked successfully: https://github.com/mathieudutour/create-react-native-app-typescript
+    - This did not work, but has some good info: https://github.com/Microsoft/TypeScript-React-Native-Starter/issues/34#issuecomment-375892672
+# Create React Native Readme Stuff
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://github.com/react-community/create-react-native-app/blob/master/react-native-scripts/template/README.md).
