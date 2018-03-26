@@ -4,6 +4,7 @@
 ## Configuring React Native with Typescript
     - This worked successfully: https://github.com/mathieudutour/create-react-native-app-typescript
     - This did not work, but has some good info: https://github.com/Microsoft/TypeScript-React-Native-Starter/issues/34#issuecomment-375892672
+    - NOTE: Test files must be named with the `.tsx` extension. Using the `.ts` extension will produce errors because React components in the JSX syntax will not be correctly interpreted when compiling/transpiling.
 # Create React Native Readme Stuff
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
