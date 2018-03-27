@@ -29,7 +29,7 @@ export default class App extends React.Component<{}, AppState> {
     }
     return  products.map((prod, i) => 
       <Button 
-        title={"test"}
+        title={prod.id}
         onPress={onPress.bind(null, prod)}
         key={i}
       />
