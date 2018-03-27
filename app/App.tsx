@@ -1,9 +1,10 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { getProducts } from './gdax_api';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { getProducts } from './src/gdax_api';
+import { gdaxProduct } from './src/interfaces/gdax_product';
 
 interface AppState {
-  products: ReadonlyArray<any>
+  products: ReadonlyArray<gdaxProduct>
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -23,7 +24,16 @@ export default class App extends React.Component<{}, AppState> {
 
   listAvailableProducts() {
     const { products } = this.state;
-    return  products.map(p => <Text style={styles.product}>{p.id}</Text>);
+    function onPress(product: gdaxProduct): any {
+      console.log(product.id);
+    }
+    return  products.map((prod, i) => 
+      <Button 
+        title={"test"}
+        onPress={onPress.bind(null, prod)}
+        key={i}
+      />
+    );
   }
 
   render() {
@@ -33,7 +43,9 @@ export default class App extends React.Component<{}, AppState> {
         <Text>Open up App.ts to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
-        {this.listAvailableProducts()}
+        <View style={styles.products}>
+          {this.listAvailableProducts()}
+        </View>
       </View>
     );
   }
@@ -46,8 +58,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  product: {
+  products: {
     alignItems: 'flex-start',
+    justifyContent: 'flex-start',
     backgroundColor: '#fff',
   },
 });
