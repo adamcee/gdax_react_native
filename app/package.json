@@ -1,5 +1,5 @@
 {
-  "name": "gdax_app",
+  "name": "app",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -48,7 +48,6 @@
   },
   "dependencies": {
     "expo": "^25.0.0",
-    "node-fetch": "^2.1.2",
     "react": "16.2.0",
     "react-native": "0.52.0"
   }
