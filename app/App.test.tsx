@@ -21,7 +21,7 @@ test('GDAXProduct Interface: interface is correct for key properties in our mock
 
 });
 
-test('groupProductsByBaseCurrency: correctly groups gdax products by base currency', () => {
+describe('groupProductsByBaseCurrency: correctly groups gdax products by base currency', () => {
   // These values were manually gotten from mocks/gdax_products.json
   const mockBaseCurrencies = ['BTC', 'ETH', 'LTC', 'BCH'];
   const BTC = 'BTC';
@@ -29,10 +29,10 @@ test('groupProductsByBaseCurrency: correctly groups gdax products by base curren
   const LTC = 'LTC';
   const BCH = 'BCH';
 
-  const numBTC = 2;
-  const numETH = 2;
-  const numLTC = 2;
-  const numBCH = 2;
+  const numBTC = 3;
+  const numETH = 3;
+  const numLTC = 3;
+  const numBCH = 3;
 
   const groupedProducts = groupProductsByBaseCurrency(mockGDAXProducts);
   const groupBTC = groupedProducts[BTC];
@@ -40,25 +40,29 @@ test('groupProductsByBaseCurrency: correctly groups gdax products by base curren
   const groupLTC = groupedProducts[LTC];
   const groupBCH = groupedProducts[BCH];
 
-  // each base currency has an array constructed on the object
-  expect(groupBTC).toBeInstanceOf(Array);
-  expect(groupETH).toBeInstanceOf(Array);
-  expect(groupLTC).toBeInstanceOf(Array);
-  expect(groupBCH).toBeInstanceOf(Array);
+  it('should have an object property keyed to each base currency, which contains an array', () => {
+    expect(groupBTC).toBeInstanceOf(Array);
+    expect(groupETH).toBeInstanceOf(Array);
+    expect(groupLTC).toBeInstanceOf(Array);
+    expect(groupBCH).toBeInstanceOf(Array);
+  });
 
-  // each base currency array contains the expected number of products
-  expect(groupBTC.length).toEqual(numBTC);
-  expect(groupETH.length).toEqual(numETH);
-  expect(groupLTC.length).toEqual(numLTC);
-  expect(groupBCH.length).toEqual(numBCH);
+  it('should contains the expected number of products in each base currencys array', () => {
+    expect(groupBTC.length).toEqual(numBTC);
+    expect(groupETH.length).toEqual(numETH);
+    expect(groupLTC.length).toEqual(numLTC);
+    expect(groupBCH.length).toEqual(numBCH);
+  });
 
-  // the total number of products in the original array and in our map is the same
-  const sumGroups = groupBTC.length + groupETH.length + groupLTC.length + groupBCH.length;
-  expect(sumGroups).toEqual(mockBaseCurrencies.length);
+  it('should have the same number of elements in its arrays (sum of all arrays) as the array of all products of all base currencies', () => {
+    const sumGroups = groupBTC.length + groupETH.length + groupLTC.length + groupBCH.length;
+    expect(sumGroups).toEqual(mockGDAXProducts.length);
+  });
 
-  // each base currency array only contains products of the desired base currency
-  groupBTC.forEach(product => expect(product.base_currency).toEqual(BTC));
-  groupETH.forEach(product => expect(product.base_currency).toEqual(ETH));
-  groupLTC.forEach(product => expect(product.base_currency).toEqual(LTC));
-  groupBCH.forEach(product => expect(product.base_currency).toEqual(BCH));
+  it('should only contain products of the desired base currency in each array', () => {
+    groupBTC.forEach(product => expect(product.base_currency).toEqual(BTC));
+    groupETH.forEach(product => expect(product.base_currency).toEqual(ETH));
+    groupLTC.forEach(product => expect(product.base_currency).toEqual(LTC));
+    groupBCH.forEach(product => expect(product.base_currency).toEqual(BCH));
+  });
 });

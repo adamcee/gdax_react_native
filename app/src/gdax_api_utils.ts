@@ -14,9 +14,9 @@ export function groupProductsByBaseCurrency(products: Array<GDAXProduct>): GDAXP
         const base_currency = product.base_currency;
         if (!container.hasOwnProperty(base_currency)) {
             container[base_currency] = [] as Array<GDAXProduct>;
-        } else {
-            container[base_currency].push(product);
-        }
+        } 
+
+        container[base_currency].push(product);
         return container;
     }
 
