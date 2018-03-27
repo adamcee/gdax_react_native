@@ -1,6 +1,6 @@
 // gdax_api_interaces.ts
 // interface for gdax product
-export interface gdaxProduct {
+export interface GDAXProduct {
     id: string;
     base_currency: string;
     quote_currency: string;
@@ -16,4 +16,8 @@ export interface gdaxProduct {
     post_only: boolean;
     limit_only: boolean;
     cancel_only: boolean;
+}
+
+export interface GDAXProductMap {
+  [index: string]: Array<GDAXProduct>
 }
