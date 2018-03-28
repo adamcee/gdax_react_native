@@ -1,7 +1,7 @@
 // ProductDetail.tsx
 // Show detailed information for a GDAX Product 
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { GDAXProduct } from './interfaces/gdax_product';
 
 interface ComponentProps {

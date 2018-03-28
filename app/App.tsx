@@ -84,8 +84,8 @@ export default class App extends React.Component<{}, AppState> {
     return (
       <View style={styles.container}>
         <Text>Press a button to hide/show information.</Text>
-        <Text>Select a GDAX Base Currency to see which Quote Currencies are available for it.</Text>
-        <Text>You can then select a Quote Currency to see detailed product info.</Text>
+        <Text>Select a GDAX Base Currency.</Text>
+        <Text>You can then select a Quote Currency for product info.</Text>
         <View>
           {this.listBaseCurrencies()}
         </View>

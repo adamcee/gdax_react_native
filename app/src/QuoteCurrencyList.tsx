@@ -1,8 +1,7 @@
 // QuoteCurrencyList.tsx
 import * as React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { GDAXProduct, GDAXProductMap } from './interfaces/gdax_product';
-import { groupProductsByBaseCurrency } from './gdax_api_utils';
+import { GDAXProduct } from './interfaces/gdax_product';
 import { toggleElInUniqueStringArray } from './utils';
 import ProductDetail from './ProductDetail';
 
