@@ -42,34 +42,34 @@ export default class QuoteCurrencyList extends React.Component<ComponentProps, C
     return null;
   }
 
-  render() {
-    const { qcProds } = this.props;
+  renderQcProductButtonAndDetails(qcp: GDAXProduct, i: number) {
     const { selectedProductIds } = this.state;
     const buttonBaseStyle = {
       borderColor: 'black',
       borderLeftWidth: 5,
       borderRightWidth: 5,
     };
+    const backgroundColor = selectedProductIds.includes(qcp.id) ? '#33E9FF' : 'white';
+    const buttonStyle = Object.assign({}, buttonBaseStyle, { backgroundColor: backgroundColor });
+    return (
+      <View key={`prod_view_${i}`}>
+        <Button
+          key={i}
+          title={qcp.quote_currency}
+          color='black'
+          onPress={this.toggleProductInfo.bind(null, qcp.id)}
+          buttonStyle={buttonStyle}
+        />
+        {this.hideShowProductDetail(selectedProductIds, qcp, i)}
+      </View>
+    );
+  }
 
+  render() {
+    const { qcProds } = this.props;
     return (
       <View key={`qc_view_${qcProds[0].quote_currency}`}> 
-        {qcProds.map((qcp, i) => {
-          const backgroundColor = selectedProductIds.includes(qcp.id) ? '#33E9FF' : 'white';
-          const buttonStyle = Object.assign({}, buttonBaseStyle, {backgroundColor: backgroundColor});
-
-          return (
-            <View key={`prod_view_${i}`}>
-              <Button
-                key={i}
-                title={qcp.quote_currency}
-                color='black'
-                onPress={this.toggleProductInfo.bind(null, qcp.id)}
-                buttonStyle={buttonStyle}
-              />
-              {this.hideShowProductDetail(selectedProductIds, qcp, i)}
-            </View>
-          );
-        })}
+        {qcProds.map((qcp, i) => this.renderQcProductButtonAndDetails(qcp, i))}
       </View>
     );
   }
