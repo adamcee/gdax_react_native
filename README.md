@@ -7,6 +7,7 @@
      - Then up the inotify watcher limit as described [here](https://github.com/react-community/create-react-native-app/issues/229#issuecomment-325183694):
        - `sudo sysctl -w fs.inotify.max_user_instances=1024 && sudo sysctl -w fs.inotify.max_user_watches=12288`
    - On Linux, you will have to use `install-watchman.sh` to install from source. You can do this in the root directory of the _project_ (not `app/` !), if you wish.
+   - After installation, run `watchman` from the command line. You should see a message.
  - Run `cd app/` to navigate to the root directory of the mobile app.
  - Run `yarn` (preferable), or, `npm install` if you do not have yarn. Installation may take a bit.
  - Install the [Expo](https://expo.io/) app on your mobile device.
