@@ -62,18 +62,24 @@ export default class App extends React.Component<{}, AppState> {
   // list all the base currencies
   listBaseCurrencies() {
     const { productsByBaseCurrency, baseCurrencies, selectedBaseCurrencies } = this.state;
-    return baseCurrencies.map((bc, i) =>
-      <View>
-        <Button
-          key={i}
-          title={bc}
-          onPress={this.toggleBaseCurrency.bind(null, bc)}
-        />
-        {selectedBaseCurrencies.includes(bc) ? 
-          <QuoteCurrencyList qcProds={productsByBaseCurrency[bc]} /> : <View/>
-        }       
-      </View>
+    return baseCurrencies.map((bc, i) => 
+      this.listBaseCurrency(bc, selectedBaseCurrencies, productsByBaseCurrency[bc])
     );
+  }
+
+  listBaseCurrency(bcName: string, selectedBcs: ReadonlyArray<string>, selectedBcProducts:  ReadonlyArray<GDAXProduct>) {
+      const isSelected = selectedBcs.includes(bcName);
+      const style = isSelected ? styles.selectedButton : styles.button
+      return (
+        <View>
+          <Button
+            key={bcName}
+            title={bcName}
+            onPress={this.toggleBaseCurrency.bind(null, bcName)}
+          />
+          {isSelected ? <QuoteCurrencyList qcProds={selectedBcProducts} /> : null }       
+        </View>
+      );
   }
 
   render() {
@@ -97,5 +103,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  button: {
+    backgroundColor: 'blue',
+  },
+  selectedButton: {
+    backgroundColor: 'green',
   },
 });
