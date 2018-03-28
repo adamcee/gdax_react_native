@@ -3,11 +3,20 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { getProducts } from './src/gdax_api';
 import { GDAXProduct, GDAXProductMap } from './src/interfaces/gdax_product';
 import { groupProductsByBaseCurrency } from './src/gdax_api_utils';
+import { toggleElInUniqueStringArray } from './src/utils';
+import QuoteCurrencyList from './src/QuoteCurrencyList';
 
-interface AppState {
+interface GDAXProductState {
   products: ReadonlyArray<GDAXProduct>;
   productsByBaseCurrency: GDAXProductMap;
   baseCurrencies: ReadonlyArray<string>;
+}
+
+interface SelectedProductsState {
+  selectedBaseCurrencies: Array<string>;
+}
+
+interface AppState extends GDAXProductState, SelectedProductsState {
 }
 
 export default class App extends React.Component<{}, AppState> {
@@ -17,7 +26,10 @@ export default class App extends React.Component<{}, AppState> {
       products: [],
       productsByBaseCurrency: {},
       baseCurrencies: [],
+      selectedBaseCurrencies: [],
     };
+
+    this.toggleBaseCurrency = this.toggleBaseCurrency.bind(this);
   }
 
   componentDidMount() {
@@ -26,8 +38,6 @@ export default class App extends React.Component<{}, AppState> {
         .then(( json ) => {
           const groupedProducts: GDAXProductMap = groupProductsByBaseCurrency(json);
           const baseCurrencies: Array<string> = Object.keys(groupedProducts);
-          console.log('BASE CURRENCIES: ', baseCurrencies);
-          console.log('GROUPED PRODUCTS: ', groupedProducts);
           this.setState({
             products: json,
             productsByBaseCurrency: groupedProducts,
@@ -37,25 +47,32 @@ export default class App extends React.Component<{}, AppState> {
         .catch(error => console.log(error));
   }
 
-  listProducts(products: Array<GDAXProduct>) {
-    let container: GDAXProductMap = {};
-    const baseCurrencies = products.reduce(groupProductsByBase, container);
-    function groupProductsByBase(container: GDAXProductMap, product: GDAXProduct): any {
-      const base_currency = product.base_currency;
-      if (!container.hasOwnProperty(base_currency)) {
-        container[base_currency] = [] as Array<GDAXProduct>;
-      }
-    }
+  // toggle if the quote currencies belonging to a given base currency are displayed or not.
+  toggleBaseCurrency(baseCurrency: string) {
+    console.log('STATE IS: ', this.state)
+    const { selectedBaseCurrencies } = this.state;
+    console.log('OLD ', selectedBaseCurrencies)
+    const updated = toggleElInUniqueStringArray(selectedBaseCurrencies, baseCurrency);
+    console.log('NEW ', updated)
+    this.setState(prev => ({
+      selectedBaseCurrencies: updated
+    }));
+  }
 
-    function onPress(product: GDAXProduct): any {
-      console.log(product.id);
-    }
-    return  products.map((prod, i) => 
-      <Button 
-        title={prod.id}
-        onPress={onPress.bind(null, prod)}
-        key={i}
-      />
+  // list all the base currencies
+  listBaseCurrencies() {
+    const { productsByBaseCurrency, baseCurrencies, selectedBaseCurrencies } = this.state;
+    return baseCurrencies.map((bc, i) =>
+      <View>
+        <Button
+          key={i}
+          title={bc}
+          onPress={this.toggleBaseCurrency.bind(null, bc)}
+        />
+        {selectedBaseCurrencies.includes(bc) ? 
+          <QuoteCurrencyList qcProds={productsByBaseCurrency[bc]} /> : <View/>
+        }       
+      </View>
     );
   }
 
@@ -66,13 +83,8 @@ export default class App extends React.Component<{}, AppState> {
         <Text>Open up App.ts to start working on your app!</Text>
         <Text>Changes you make will automatically reload.</Text>
         <Text>Shake your phone to open the developer menu.</Text>
-        <View style={styles.products}>
-          {
-            baseCurrencies.map((bc, i) => {
-              const products = productsByBaseCurrency[bc];
-              return (<Text key={i}>{bc}</Text>);
-            })
-          }
+        <View> 
+          {this.listBaseCurrencies()}
         </View>
       </View>
     );
@@ -85,10 +97,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  products: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    backgroundColor: '#fff',
   },
 });
