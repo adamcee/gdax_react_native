@@ -49,7 +49,7 @@ export default class QuoteCurrencyList extends React.Component<ComponentProps, C
   render() {
     const { qcProds } = this.props;
     return (
-      <View style={styles.container} >
+      <View> 
         {qcProds.map((qcp, i) =>
           <Button
             key={i}
@@ -63,15 +63,4 @@ export default class QuoteCurrencyList extends React.Component<ComponentProps, C
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  products: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    backgroundColor: '#fff',
-  },
 });
