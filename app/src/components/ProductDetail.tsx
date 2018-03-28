@@ -1,8 +1,9 @@
 // ProductDetail.tsx
 // Show detailed information for a GDAX Product 
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { GDAXProduct } from './interfaces/gdax_product';
+import { StyleSheet, View } from 'react-native';
+import { Card, Text } from 'react-native-elements';
+import { GDAXProduct } from '../interfaces/gdax_product';
 
 interface ComponentProps {
   product: GDAXProduct;
@@ -24,11 +25,11 @@ export default class ProductDetail extends React.Component<ComponentProps, Compo
         const { product } = this.props;
         const productDetailNames = Object.keys(product);
         return (
-            <View>
+            <Card wrapperStyle={{ marginLeft: 20, marginRight: 20}} >
                 {productDetailNames.map((detail, i) =>
-                    <Text key={i}>{detail}: {product[detail]}</Text>
+                    <Text key={i}><Text h4>{detail}</Text>: {product[detail]}</Text>
                 )}
-            </View>
+            </Card>
         );
     }
 }

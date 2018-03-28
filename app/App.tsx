@@ -1,10 +1,11 @@
 import * as React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Button, Divider, Text } from 'react-native-elements';
 import { getProducts } from './src/gdax_api';
 import { GDAXProduct, GDAXProductMap } from './src/interfaces/gdax_product';
 import { groupProductsByBaseCurrency } from './src/gdax_api_utils';
 import { toggleElInUniqueStringArray } from './src/utils';
-import QuoteCurrencyList from './src/QuoteCurrencyList';
+import QuoteCurrencyList from './src/components/QuoteCurrencyList';
 
 interface GDAXProductState {
   products: ReadonlyArray<GDAXProduct>;
@@ -67,12 +68,22 @@ export default class App extends React.Component<{}, AppState> {
   listBaseCurrency(id: number, bcName: string, selectedBcs: ReadonlyArray<string>, selectedBcProducts: ReadonlyArray<GDAXProduct>) {
     const isSelected = selectedBcs.includes(bcName);
     const color = isSelected ? '#33FF4F' : '#33B5FF';
+    const buttonStyle = {
+      backgroundColor: color,
+      borderColor: 'black',
+      borderBottomWidth: 3,
+      borderLeftWidth: 3,
+      borderRightWidth: 3,
+      width: "100%",
+    };
+
     return (
       <View key={`${id}_view`}>
-        <Button color={color}
+        <Button 
           key={id}
           title={bcName}
           onPress={this.toggleBaseCurrency.bind(null, bcName)}
+          buttonStyle={buttonStyle}
         />
         {isSelected ? <QuoteCurrencyList qcProds={selectedBcProducts} /> : null}
       </View>
@@ -82,23 +93,26 @@ export default class App extends React.Component<{}, AppState> {
   render() {
     const { products, productsByBaseCurrency, baseCurrencies } = this.state;
     return (
-      <View style={styles.container}>
-        <Text>Press a button to hide/show information.</Text>
-        <Text>Select a GDAX Base Currency.</Text>
-        <Text>You can then select a Quote Currency for product info.</Text>
+      <ScrollView style={styles.container}> 
+        <Text h4 style={styles.instructions} >Select a GDAX Base Currency.</Text>
+        <Text h4 style={styles.instructions} >Then select a Quote Currency for product info.</Text>
+        <Text h4 style={styles.instructions} >Scroll and toggle.</Text>
         <View>
           {this.listBaseCurrencies()}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 40,
+    paddingBottom: 80,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
+  instructions: {
+    paddingLeft: 10,
+    paddingRight: 10,
+  }
 });
