@@ -1,13 +1,16 @@
 # A Simple React Native App to Interact With the GDAX API
 
 # Resources
-## Configuring React Native with Typescript
-    - This worked successfully: https://github.com/mathieudutour/create-react-native-app-typescript
-    - This did not work, but has some good info: https://github.com/Microsoft/TypeScript-React-Native-Starter/issues/34#issuecomment-375892672
-    - NOTE: Test files must be named with the `.tsx` extension. Using the `.ts` extension will produce errors because React components in the JSX syntax will not be correctly interpreted when compiling/transpiling.
-    - If you get an 'Unable to Resolve Modules Error', you may have to:
-        - https://github.com/facebook/react-native/issues/4968
-        - https://github.com/facebook/react-native/issues/11498
+
+## Notes on Configuring React Native with Typescript
+- This worked successfully:
+  - https://github.com/mathieudutour/create-react-native-app-typescript
+- This did not work, but has some good info: 
+  - https://github.com/Microsoft/TypeScript-React-Native-Starter/issues/34#issuecomment-375892672
+- If you get an 'Unable to Resolve Modules Error', you may have to:
+ - https://github.com/facebook/react-native/issues/4968
+ - https://github.com/facebook/react-native/issues/11498
+        
 # Create React Native Readme Stuff
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 
