@@ -34,7 +34,6 @@ export default class QuoteCurrencyList extends React.Component<ComponentProps, C
 
   hideShowProductDetail(selectedProductIds: ReadonlyArray<string>, product: GDAXProduct, key: number) {
     const isSelected = selectedProductIds.includes(product.id);
-    console.log('PRODUCT ${product.id}, selected is: ', isSelected);
     if(isSelected) {
       return (
         <ProductDetail product={product} key={`${key}_prod`} />

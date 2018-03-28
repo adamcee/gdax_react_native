@@ -17,10 +17,6 @@ export default class ProductDetail extends React.Component<ComponentProps, Compo
         super(props);
     }
 
-    componentDidMount() {
-        console.log('PRODUCT DETAIL: ', this.props.product);
-    }
-
     render() {
         const { product } = this.props;
         const productDetailNames = Object.keys(product);

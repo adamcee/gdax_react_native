@@ -34,7 +34,6 @@ export default class App extends React.Component<{}, AppState> {
   }
 
   componentDidMount() {
-    console.log("ABOUT TO FETCH");
     const products = getProducts()
       .then((json) => {
         const groupedProducts: GDAXProductMap = groupProductsByBaseCurrency(json);
