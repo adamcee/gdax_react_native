@@ -1,6 +1,7 @@
 # Simple React Native App which interacts with the GDAX API
 
 # INSTALL NOTES
+ - Run `cd app/` to navigate to the root directory of the mobile app.
  - Run `yarn` (preferable), or, `npm install` if you do not have yarm.
  - Install the [Expo](https://expo.io/) app on your mobile device.
  - Make sure your computer and mobile device are on the same wireless network.
