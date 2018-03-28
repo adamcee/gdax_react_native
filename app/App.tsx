@@ -34,26 +34,23 @@ export default class App extends React.Component<{}, AppState> {
 
   componentDidMount() {
     console.log("ABOUT TO FETCH");
-      const products = getProducts()
-        .then(( json ) => {
-          const groupedProducts: GDAXProductMap = groupProductsByBaseCurrency(json);
-          const baseCurrencies: Array<string> = Object.keys(groupedProducts);
-          this.setState({
-            products: json,
-            productsByBaseCurrency: groupedProducts,
-            baseCurrencies: baseCurrencies,
-          })
+    const products = getProducts()
+      .then((json) => {
+        const groupedProducts: GDAXProductMap = groupProductsByBaseCurrency(json);
+        const baseCurrencies: Array<string> = Object.keys(groupedProducts);
+        this.setState({
+          products: json,
+          productsByBaseCurrency: groupedProducts,
+          baseCurrencies: baseCurrencies,
         })
-        .catch(error => console.log(error));
+      })
+      .catch(error => console.log(error));
   }
 
   // toggle if the quote currencies belonging to a given base currency are displayed or not.
   toggleBaseCurrency(baseCurrency: string) {
-    console.log('STATE IS: ', this.state)
     const { selectedBaseCurrencies } = this.state;
-    console.log('OLD ', selectedBaseCurrencies)
     const updated = toggleElInUniqueStringArray(selectedBaseCurrencies, baseCurrency);
-    console.log('NEW ', updated)
     this.setState(prev => ({
       selectedBaseCurrencies: updated
     }));
@@ -62,34 +59,34 @@ export default class App extends React.Component<{}, AppState> {
   // list all the base currencies
   listBaseCurrencies() {
     const { productsByBaseCurrency, baseCurrencies, selectedBaseCurrencies } = this.state;
-    return baseCurrencies.map((bc, i) => 
-      this.listBaseCurrency(bc, selectedBaseCurrencies, productsByBaseCurrency[bc])
+    return baseCurrencies.map((bc, i) =>
+      this.listBaseCurrency(i, bc, selectedBaseCurrencies, productsByBaseCurrency[bc])
     );
   }
 
-  listBaseCurrency(bcName: string, selectedBcs: ReadonlyArray<string>, selectedBcProducts:  ReadonlyArray<GDAXProduct>) {
-      const isSelected = selectedBcs.includes(bcName);
-      const style = isSelected ? styles.selectedButton : styles.button
-      return (
-        <View>
-          <Button
-            key={bcName}
-            title={bcName}
-            onPress={this.toggleBaseCurrency.bind(null, bcName)}
-          />
-          {isSelected ? <QuoteCurrencyList qcProds={selectedBcProducts} /> : null }       
-        </View>
-      );
+  listBaseCurrency(id: number, bcName: string, selectedBcs: ReadonlyArray<string>, selectedBcProducts: ReadonlyArray<GDAXProduct>) {
+    const isSelected = selectedBcs.includes(bcName);
+    const color = isSelected ? '#33FF4F' : '#33B5FF';
+    return (
+      <View key={`${id}_view`}>
+        <Button color={color}
+          key={id}
+          title={bcName}
+          onPress={this.toggleBaseCurrency.bind(null, bcName)}
+        />
+        {isSelected ? <QuoteCurrencyList qcProds={selectedBcProducts} /> : null}
+      </View>
+    );
   }
 
   render() {
     const { products, productsByBaseCurrency, baseCurrencies } = this.state;
     return (
       <View style={styles.container}>
-        <Text>Open up App.ts to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-        <View> 
+        <Text>Press a button to hide/show information.</Text>
+        <Text>Select a GDAX Base Currency to see which Quote Currencies are available for it.</Text>
+        <Text>You can then select a Quote Currency to see detailed product info.</Text>
+        <View>
           {this.listBaseCurrencies()}
         </View>
       </View>
@@ -103,11 +100,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: 'blue',
-  },
-  selectedButton: {
-    backgroundColor: 'green',
   },
 });
