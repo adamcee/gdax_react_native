@@ -1,10 +1,9 @@
 import * as React from 'react';
-import App from './App';
-import { GDAXProductMap, GDAXProduct } from './src/interfaces/gdax_product';
-import { groupProductsByBaseCurrency } from './src/gdax_api_utils';
-import { toggleElInUniqueStringArray } from './src/utils';
-
-const mockGDAXProducts = require('./mocks/gdax_products.json');
+import App from '../App';
+import { GDAXProductMap, GDAXProduct } from '../src/interfaces/gdax_product';
+import { groupProductsByBaseCurrency } from '../src/gdax_api_utils';
+import { toggleElInUniqueStringArray } from '../src/utils';
+const mockGDAXProducts = require('../mocks/gdax_products.json');
 
 import * as renderer from 'react-test-renderer';
 
