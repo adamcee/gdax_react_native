@@ -1,9 +1,6 @@
 // async.ts
 // functions for asynchronous http calls
 
-// TODO: Either pass a whatwg url type in to all the getResource functions as the only param,
-//      or define an interface so we dont have to repeat stuff.
-// TODO: Convert to whatwg URL and check is valid, use TS builtin for this
 export function getJSONResource(host: string, resourceName: string) {
     return getResource(host, resourceName)
         .then(response => response.json());
