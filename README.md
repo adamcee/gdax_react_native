@@ -1,6 +1,10 @@
 # Simple React Native App which interacts with the GDAX API
 
 # INSTALL NOTES
+ - Clone the project.
+ - There is a good chance you may have to install [Watchman](https://facebook.github.io/watchman/docs/install.html), which [create-react-native-app(https://github.com/react-community/create-react-native-app) depends on. For details, [see here](https://github.com/react-community/create-react-native-app/issues/229#issuecomment-325183694).
+   - On OS X, you can install watchman by `brew doctor && brew update &&  brew install watchman``.
+   - On Linux, unfortunately you will have to use `install_watchman.sh` to install from source. 
  - Run `cd app/` to navigate to the root directory of the mobile app.
  - Run `yarn` (preferable), or, `npm install` if you do not have yarn. Installation may take a bit.
  - Install the [Expo](https://expo.io/) app on your mobile device.
