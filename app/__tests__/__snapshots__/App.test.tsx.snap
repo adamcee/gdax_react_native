@@ -1,102 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> renders correctly 1`] = `
-<RCTScrollView
-  style={
-    Object {
-      "flex": 1,
-      "paddingBottom": 80,
-      "paddingTop": 40,
-    }
-  }
->
-  <View>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {},
-          undefined,
-          undefined,
-          undefined,
-          Object {
-            "fontSize": 27.5,
-          },
-          undefined,
-          undefined,
-          undefined,
-          Object {},
-          undefined,
-          Object {
-            "paddingLeft": 10,
-            "paddingRight": 10,
-          },
-        ]
-      }
-    >
-      Select a GDAX Base Currency.
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {},
-          undefined,
-          undefined,
-          undefined,
-          Object {
-            "fontSize": 27.5,
-          },
-          undefined,
-          undefined,
-          undefined,
-          Object {},
-          undefined,
-          Object {
-            "paddingLeft": 10,
-            "paddingRight": 10,
-          },
-        ]
-      }
-    >
-      Then select a Quote Currency for product info.
-    </Text>
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={
-        Array [
-          Object {},
-          undefined,
-          undefined,
-          undefined,
-          Object {
-            "fontSize": 27.5,
-          },
-          undefined,
-          undefined,
-          undefined,
-          Object {},
-          undefined,
-          Object {
-            "paddingLeft": 10,
-            "paddingRight": 10,
-          },
-        ]
-      }
-    >
-      Scroll and toggle.
-    </Text>
-    <View />
-  </View>
-</RCTScrollView>
-`;
-
 exports[`test child components which require props <ProductDetail /> renders correctly 1`] = `
 <View
   style={
@@ -1173,4 +1076,101 @@ exports[`test child components which require props <QuoteCurrencyList /> renders
     </View>
   </View>
 </View>
+`;
+
+exports[`test the <App /> component <App /> renders correctly 1`] = `
+<RCTScrollView
+  style={
+    Object {
+      "flex": 1,
+      "paddingBottom": 80,
+      "paddingTop": 40,
+    }
+  }
+>
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {},
+          undefined,
+          undefined,
+          undefined,
+          Object {
+            "fontSize": 27.5,
+          },
+          undefined,
+          undefined,
+          undefined,
+          Object {},
+          undefined,
+          Object {
+            "paddingLeft": 10,
+            "paddingRight": 10,
+          },
+        ]
+      }
+    >
+      Select a GDAX Base Currency.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {},
+          undefined,
+          undefined,
+          undefined,
+          Object {
+            "fontSize": 27.5,
+          },
+          undefined,
+          undefined,
+          undefined,
+          Object {},
+          undefined,
+          Object {
+            "paddingLeft": 10,
+            "paddingRight": 10,
+          },
+        ]
+      }
+    >
+      Then select a Quote Currency for product info.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {},
+          undefined,
+          undefined,
+          undefined,
+          Object {
+            "fontSize": 27.5,
+          },
+          undefined,
+          undefined,
+          undefined,
+          Object {},
+          undefined,
+          Object {
+            "paddingLeft": 10,
+            "paddingRight": 10,
+          },
+        ]
+      }
+    >
+      Scroll and toggle.
+    </Text>
+    <View />
+  </View>
+</RCTScrollView>
 `;

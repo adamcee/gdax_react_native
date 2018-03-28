@@ -9,6 +9,7 @@
     "@types/react-native-elements": "^0.18.0",
     "@types/react-test-renderer": "^16.0.0",
     "jest-expo": "25.0.0",
+    "jest-fetch-mock": "^1.5.0",
     "react-native-scripts-ts": "1.11.4",
     "react-native-typescript-transformer": "^1.2.3",
     "react-test-renderer": "16.2.0",
@@ -45,7 +46,11 @@
     ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
-    }
+    },
+    "automock": false,
+    "setupFiles": [
+      "./setupJest.js"
+    ]
   },
   "dependencies": {
     "expo": "^25.0.0",
