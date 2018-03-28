@@ -57,5 +57,3 @@ describe('test child components which require props', () => {
     expect(tree).toMatchSnapshot();
   });
 });
-
-
